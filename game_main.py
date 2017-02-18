@@ -1,12 +1,15 @@
 from Mountain import Mountain
 from Town import Town
+from Forest import Forest
+
 from random import random
+
 
 class GameEngine:
 
 	def __init__(self):
-		self.game_state = "town"
-		self.scenario = Town()
+		self.game_state = "mountain"
+		self.scenario = Mountain()
 	
 	def getNextMessage(self):
 		return self.scenario.getNextMessage()
@@ -16,18 +19,20 @@ class GameEngine:
 		
 	def nextState(self, action):
 		response = self.scenario.nextState(action)
-	
-		if self.game_state is "mountain":
-			if "Forest" in response:
+		if self.game_state == "mountain":
+			if "Forest" == response:
 				self.game_state = "Forest"
-				#self.scenario = Forest()
+				self.scenario = Forest()
 			else:
 				self.game_state = "Castle"
 				#self.scenario = Castle()
 			
-		elif self.game_state is "Forest":
-			pass
-		elif self.game_state is "Castle":
+		elif self.game_state == "Forest":
+			if "Town" == response:
+				self.game_state = "Town"
+				self.scenario = Town()
+
+		elif self.game_state == "Castle":
 			pass
 		else:
 			#game_state is "town"
@@ -35,10 +40,7 @@ class GameEngine:
 			
 		
 	def isVictory(self):
-		if self.game_state == "Forest":
-			return True
-		else:
-			return self.scenario.isVictory()
+		return self.scenario.isVictory()
 	
 	def isDefeat(self):
 		if self.game_state == "Castle":
@@ -64,7 +66,7 @@ if __name__== "__main__":
 		print(msg)
 		
 		if action == "combat":
-			next_state = input("Enter 1-4: ")
+			next_state = raw_input("Enter 1-4: ")
 			if next_state == "1":
 				next_state = "great success"
 			elif next_state == "2":
@@ -76,7 +78,7 @@ if __name__== "__main__":
 			
 			
 		elif action == "choice":
-			next_state = input("Enter phrase in \"__\" (double underscore): ")
+			next_state = raw_input("Enter phrase in \"__\" (double underscore): ")
 			
 		elif action == "SuccessRoll":
 			rng = random()
