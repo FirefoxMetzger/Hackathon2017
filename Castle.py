@@ -24,7 +24,7 @@ class Castle:
         return self.game_state.isDefeat
         
 class SubCastle:
-    message = """You have taken the path to the castle.. you come to a stop at the gate.. you can either enter the castle.. or go round and walk through the garden.. would you enter... Or go to the garden.."""
+    message = """You have taken the path to the castle... you come to a stop at the gate... you can either enter the castle... or go round and walk through the garden... would you enter... Or go to the garden..."""
     action = "choice"
     vocabulary = ['inside', 'garden']
     isVictory = False
@@ -36,21 +36,21 @@ class SubCastle:
             return SubGarden()
 
 class SubInside:
-    message = """you push open the door.. it slowly opens in.. you walk inside.. it seems that someone was living in the castle.. you look around.. when you look up you see a staircase leading up to another floor.. you look around and see what looks like the kitchen.. also. You see another trap door leading to what looks like the cellar.. where will you go.. upstairs.. kitchen.. or.. cellar.."""
+    message = """you push open the door... it slowly opens in... you walk inside... it seems that someone was living in the castle... you look around... when you look up. you see a staircase leading up to another floor... you look around and see what looks like the kitchen... finally, You see another trap door leading to what looks like the cellar... where will you go... upstairs... kitchen... or.. downstairs to the celler..."""
     action = "choice"
-    vocabulary = ['upstairs', 'door', 'downstairs']
+    vocabulary = ['upstairs', 'kitchen', 'downstairs']
     isVictory = False
     isDefeat = False
     def nextState(self, action):
         if action == "upstairs":
             return SubHallway()
-        elif action == "door":
+        elif action == "kitchen":
             return SubKitchen()
         elif action == "downstairs":
             return SubWitchLair()
     
 class SubHallway:
-    message = """you climb the staircase slowl... you are careful not to make any noise.. you see two doors.. which one would you take.. left door or right.. """
+    message = """you climb the staircase slowly... you are careful not to make any noise... you see two doors... which one would you take.. left door ... right.. """
     action = "choice"
     vocabulary = ['right', 'left']
     isVictory = False
@@ -62,7 +62,7 @@ class SubHallway:
             return SubGargoyle()
 
 class SubCastleGhost:
-    message = """you walk through the door slowly and carefull... you hear a noise and look around.. dark figure emerges from the shadows.."""
+    message = """you walk through the door slowly and carefull... you hear a noise and look around... a dark figure emerges from the shadows..."""
     action = "SuccessRoll"
     isVictory = False
     isDefeat = False
@@ -73,7 +73,7 @@ class SubCastleGhost:
             return SubGargoyle()
             
 class SubTripAndDie:
-    message = "You fall down the stairs and break your legs. you die miserably-"
+    message = """You run away... you hear a scream and look  over your shoulder... suddenly  you run out of ground and fall off the roof... And die... """
     action = "none"
     isVictory = False
     isDefeat = True
@@ -81,7 +81,7 @@ class SubTripAndDie:
         return SubTripAndDie()
             
 class SubGargoyle:
-    message = """You push the door open and walk in.. you hear something behind you.. you see a figure moving towards you.. it's a pale ghost screaming and reaching for you.. you run awa... """
+    message = """You push the door open and walk in... you hear something behind you... you see a figure moving towards you... it's a pale ghost screaming and reaching for you... you run away... """
     action = "choice"
     vocabulary = ['fight', 'run away']
     isVictory = False
@@ -106,7 +106,7 @@ class SubGargoyleRun:
             return SubGargoyleRunEpicFail()
             
 class SubGargoyleEscape:
-    message = """You manage to run awa... you run through a door.. And manage to jump through a window and land in the garden.."""
+    message = """You manage to run away... you run through a door.. And manage to jump through a window and land in the garden.."""
     action = "none"
     isVictory = False
     isDefeat = False
@@ -114,7 +114,7 @@ class SubGargoyleEscape:
         return SubMaze()
             
 class SubGargoyleRunFail:
-    message = """you run awa... and jump over a ladder and see a dark figure.. you come closer and notice that it is a large gargoyle.. will you fight or run awa..."""
+    message = """you run awa... and jump over a ladder and see a dark figure.. you come closer and notice that it is a large gargoyle.. will you fight or run away..."""
     action = "none"
     isVictory = False
     isDefeat = False
@@ -130,7 +130,7 @@ class SubGargoyleRunEpicFail:
         return SubGargoyleRunEpicFail()
 
 class SubGargoyleFight:
-    message = "You face the Gargoyle in combat"
+    message = "looks like you would have to fight the gargoyle after all... touch my body to fight.."
     action = "combat"
     isVictory = False
     isDefeat = False
@@ -153,16 +153,16 @@ class SubGargoyleFight:
         elif self.hp <= 0:
             return SubGargoyleFightLose()
         elif self.hp == 3:
-            self.message = "Very Healthy"
+            self.message = "You manage to run away... you run through a door... And manage to jump through a window and land in the garden..."
         elif self.hp == 2:
             self.message = "Small wound"
         elif self.hp == 1:
-            self.message = "Heavily wounded"
+            self.message = "You pull your sword out to fight... the gargoyle pulls a big broadsword made out  black steel... you start to run... but you slip on the banana peel and fall and impale yourself on your own sword... you die..."
         
         return self
 
 class SubGargoyleFightWin:
-    message = "You win the fight and exit the castle ruins."
+    message = "The gargoyle is coming towards you... you know you cannot fight him... so you shout... what's that... and point over the gargoyles shoulder... when it turns around to look.. you run through a door.. And manage to jump through a window and land in the garden..."
     action = "none"
     isVictory = False
     isDefeat = False
@@ -170,7 +170,7 @@ class SubGargoyleFightWin:
         return SubExitInside()  
 
 class SubGargoyleFightLose:
-    message = "You get caught between a rock and a hard place. You are dead."
+    message = "You run away... you hear a scream and look  over your shoulder... suddenly  you run out of ground and fall off the roof.... And die.."
     action = "none"
     isVictory = False
     isDefeat = True
@@ -356,7 +356,7 @@ class SubExitInside:
         return SubFollowRoad()  
 
 class SubGarden:
-    message = "You are in the garden. Move through flowers or towards cemetry?"
+    message = "you walk around the castle... you reach a hedge and walk through an opening... you look around and notice that you have arrived in a garden... you start to walk among the trees you come to a cross road... one road leads to the garden other leads to the cemetery.... Which one will you take.... Cemetery or... the garden..."
     action = "choice"
     isVictory = False
     isDefeat = False
@@ -368,7 +368,7 @@ class SubGarden:
             return SubCemetry()
 
 class SubFlowers:
-    message = "You find a child trapped in thorns. Help or ignore?"
+    message = "You go in to the garden.... all of a sudden you notice a child trapped in a thorn bush... the child seems like he was there for some time and is in a bad state... you can ignore the child.... Or Help the child...What will you do... Ignore... or Help..."
     action = "choice"
     vocabulary = ['help','ignore']
     isVictory = False
@@ -380,7 +380,7 @@ class SubFlowers:
             return SubIgnoreChild()
 
 class SubIgnoreChild:
-    message = "You ignore the child. However, you bump into a wolf pack. Run or fight?"
+    message = "You ignore the child and walk away... after several minutes you hear a growl.... When you turn around there is a massive wolf... the wolf is growling and is ready to pounce.... Will you fight the wolf or wold you run away..."
     action = "choice"
     vocabulary = ['fight','run']
     isVictory = False
@@ -392,7 +392,7 @@ class SubIgnoreChild:
             return SubWolfRun()
 
 class SubWolfFight:
-    message = "You engage in combat with a wolf pack."
+    message = "touch my body to fight with the wolf"
     action = "combat"
     isVictory = False
     isDefeat = False
@@ -415,11 +415,11 @@ class SubWolfFight:
         elif self.hp <= 0:
             return SubWolfFightLose()
         elif self.hp == 3:
-            self.message = "Very Healthy"
+            self.message = "As soon as the wolf jump. You jump on to a nearby tree... and from there jump on the wolfs back and stab it trough the brain... the wolf is dead... you are okay and walk towards the opening... "
         elif self.hp == 2:
-            self.message = "Small wound"
+            self.message = "You jump out of the way while swinging your sword... you land a blow... but it is not hard enough... the beast is just wounded....."
         elif self.hp == 1:
-            self.message = "Heavily wounded"
+            self.message = "You jump out of the way while swinging your sword... you land on your own sword and manage to cut off your own hand.... You die..... due to blood loss..."
         
         return self
 
@@ -440,7 +440,7 @@ class SubWolfFightLose:
         return SubWolfFightLose()
 
 class SubWolfRun:
-    message = "You try to run away from the wolfs"
+    message = "You run away... you manage to run hard and fast.. and when you look back the wolf is not following you... unfortunately after several turns. You realise you are in a maze..."
     action = "SuccessRoll"
     isVictory = False
     isDefeat = False
@@ -453,7 +453,7 @@ class SubWolfRun:
                 return SubWolfRunSuccess()
 
 class SubMaze:
-    message = "You are trapped in a maze. Only Luck will get you out."
+    message = "touch my body to escape from the maze"
     action = "SuccessRoll"
     isVictory = False
     isDefeat = False

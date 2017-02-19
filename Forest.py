@@ -24,9 +24,9 @@ class Forest:
 		return self.game_state.isDefeat
 		
 class SubForest:
-	message = """You walk in to the forest... it looks dark... ancient trees grow 
-				in there... you feel as if they are looking down at you... will you 
-				enter the forest or... walk along the forest."""
+	message = """You walk in to the forest.. it looks dark and very old... trees that grow there are from the begining of time it self.... you have heard many stories about the dangers  of the forest...
+				after some time... you feel as if some one is watching you at you... will you 
+				enter the forest.... or. walk along the forest..."""
 	vocabulary = ['into forest','border']
 	action = "choice"
 	isVictory = False
@@ -34,25 +34,25 @@ class SubForest:
 	def nextState(self, action):
 		if action == "into forest":
 			return SubSpider()
-		elif action == "border":
+		elif action == "along border":
 			return SubCamp()	
 
 class SubSpider:
 	message = """you are walking deep in to the forest... you hear a noise... 
-				you look around... there is a massive spider waiting to attack 
-				you. Will you fight it... Or will you run away..."""
+				and when you turn around... there is a massive spider waiting to attack 
+				you... Will you fight it... Or will you run away..."""
 	action = "choice"
-	vocabulary = ['fight','flight']
+	vocabulary = ['fight','run away']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
 		if action == "fight":
 			return SubSpiderFight()
-		elif action == "flight":
+		elif action == "run away":
 			return SubSpiderFlight()
 			
 class SubSpiderFlight:
-	message = """shuffle your cards and show me please""" 
+	message = """You are battling the spider...""" 
 	action = "SuccessRoll"
 	isVictory = False
 	isDefeat = False
@@ -65,7 +65,9 @@ class SubSpiderFlight:
 			return SubSpiderForceFight()
 
 class SubSpiderForceFight:
-	message = "The Spider is to fast. You have to fight"
+	message = """you start to run... But you slip on a banana peel. And fall on your face... 
+				when you turn around the spider is almost upon you... you 
+				are forced to fight..."""
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -83,7 +85,7 @@ class SubSpiderRunFail:
 		return SubSpiderRunFail()
 		
 class SubSpiderFight():
-	message = """shuffle your cards and show me please"""
+	message = """Touch me if you want to fight..."""
 	action = "combat"
 	isVictory = False
 	isDefeat = False
@@ -106,11 +108,11 @@ class SubSpiderFight():
 		elif self.hp <= 0:
 			return SubSpiderDie()
 		elif self.hp == 3:
-			self.message = "Very Healthy"
+			self.message = """You delivered a Hit... But the spider is not dead... but is wounded and angry..."""
 		elif self.hp == 2:
-			self.message = "Small wound"
+			self.message = """You delivered a Hit... But the spider is not dead... but is wounded and angry..."""
 		elif self.hp == 1:
-			self.message = "Heavily wounded"
+			self.message = "I am so sorry... but the spider manage to sting you... you die... slowly..."
 		
 		return self
 			
@@ -185,7 +187,7 @@ class SubCampLockOpen:
 		return SubBandit()
 			
 class SubCampLockBreak:
-	message = "Your break the chest while you try to brutally open it and destroy the content. You turn around and see a bandit."
+	message = "You try to pick the lock for several minutes without success... then you try to break open the box... when you manage to open it... you find out that it is empty... you hear a sound... when you look around you see the owners of the camp has returned... they are robbers and they are angry... you have to fight them..."
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -193,7 +195,7 @@ class SubCampLockBreak:
 		return SubBandit()
 			
 class SubCampLockFail:
-	message = "You're lockpick breaks while you try and open the chest. You turn around and see a bandit."
+	message = "You're lockpick breaks while you try and open the chest... You turn around and see a robber with dreadlocks and a nose ring..."
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -201,19 +203,19 @@ class SubCampLockFail:
 		return SubBandit()
 		
 class SubBandit:
-	message = "Fierce looking bandit. Fight or flight?"
+	message = "The people turn out to be robbers... and they are not happy to see you... Now you have to fight them.... or run away."
 	action = "choice"
-	vocabulary = ['flight','fight']
+	vocabulary = ['flight','run away']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
 		if action == "flight":
 			return SubBanditFlight()
-		elif action == "fight":
+		elif action == "run away":
 			return SubBanditFight()
 			
 class SubBanditFlight:
-	message = "You try and run away from the bandit."
+	message = "You try and run away from the robbers."
 	action = "SuccessRoll"
 	isVictory = False
 	isDefeat = False
@@ -224,7 +226,7 @@ class SubBanditFlight:
 			return SubLostInWoods()
 			
 class SubLostInWoods:
-	message = "You escabe, but are now lost in the woods."
+	message = "You run away... but are now lost in the woods."
 	action = "SuccessRoll"
 	isVictory = False
 	isDefeat = False
@@ -237,7 +239,7 @@ class SubLostInWoods:
 			return SubRobbers()
 			
 class SubSign:
-	message = "You stumble into a sign, that shows you the way."
+	message = "You stumble into a sign... that shows you the way... you might still be able to complete the quest"
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -253,7 +255,7 @@ class SubRobbers:
 		return SubRoad()
 		
 class SubScreams:
-	message = "You are lost, but you hear screams. Follow them?"
+	message = "you run away stumbling... but now you are lost in the forest...You keep walking without knowing where you are going... after hours and hours of walking you hear children screaming... Will you walk towards to the screams to help... or will you walk away ignoring the screams... choose wisely..."
 	action = "choice"
 	vocabulary = ['follow','ignore']
 	isVictory = False
@@ -265,7 +267,7 @@ class SubScreams:
 			return SubSwamp()
 			
 class SubForestWitch:
-	message = "It was a witch, you die."
+	message = "You walk towards the screams... you see a child in the middle of an opening... you run towards it... a huge cage drops on your head... you realise it is a trap set by a witch... you are a slave for her to practice her magic on..."
 	action = "none"
 	isVictory = False
 	isDefeat = True
@@ -273,7 +275,7 @@ class SubForestWitch:
 		return SubForestWitch()
 			
 class SubSwamp:
-	message = "You are lost, but you hear screams. Follow them?"
+	message = "You keep walking without knowing where you are going... after hours and hours of walking you hear children screaming... Will you walk towards to the screams to help... or will you walk away ignoring the screams"
 	action = "SuccessRoll"
 	isVictory = False
 	isDefeat = False
@@ -286,7 +288,7 @@ class SubSwamp:
 			return SubSwampSurvive()
 
 class SubSwampSink:
-	message = "You sink into a pit and die."
+	message = "You keep walking away... after several miles... the path gets darker... suddenly you notice that you are sinking... too late you realise that you have stepped on quick sand... You struggle to pull away... but more you struggle. Faster you sink... within minutes you are totally submerged... die..."
 	action = "none"
 	isVictory = False
 	isDefeat = True
@@ -294,7 +296,7 @@ class SubSwampSink:
 		return SubRoad()
 		
 class SubSwampMonster:
-	message = "Swamp monster bites your head off."
+	message = "You are stuck in quicksand... To make matters worse... You hear a roar... when you turn around you see a massive beast... even before you manage to scream... The beast is upon you... you die... violently..."
 	action = "none"
 	isVictory = False
 	isDefeat = True
@@ -302,7 +304,7 @@ class SubSwampMonster:
 		return SubRoad()
 
 class SubSwampSurvive:
-	message = "You magically survive the swamp and find a road that you follow."
+	message = "You manage to grab a hanging vine just in time... you pull yourself out... you start walking to the opposite direction and stumble upon a road..."
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -310,7 +312,7 @@ class SubSwampSurvive:
 		return SubRoad()
 
 class SubBanditFight():
-	message = "You fight the bandit."
+	message = "You fight the bandit... manage to kill them all.."
 	action = "combat"
 	isVictory = False
 	isDefeat = False
@@ -385,7 +387,7 @@ class SubMerchant:
 			return SubMerchantAsk()
 			
 class SubMerchantRob:
-	message = """You sneak up behind him and ambush him... Shuffle your cards and show me... lets see if you succeeded or not..."""
+	message = """You sneak up behind him and ambush him... touch my body... lets see if you succeeded or not..."""
 	action = "SuccessRoll"
 	isVictory = False
 	isDefeat = False
@@ -458,7 +460,7 @@ class SubMerchantAskIgnore:
 		return SubSolider()
 			
 class SubSolider:
-	message = """You take the right path... after some hours you meat a soldier... the soldier tells you that you are needed in to the small town that lies ahead..."""
+	message = """You take the right path... after some hours you meat a soldier... the soldier ask you a riddle.... you are tired and wounded... you have no time for riddles... you slap the idiot couple of times.. and get the information you need... finaly you know your goal is in the nearby town..."""
 	action = "none"
 	isVictory = False
 	isDefeat = False

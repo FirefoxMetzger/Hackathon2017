@@ -45,7 +45,11 @@ class SpeachRecModule(ALModule):
         self.touch = ALProxy("ALTouch")
         self.tts.setVolume(0.6)
 
+        self.tts.setParameter('speed', 83)
+
         self.asr = ALProxy("ALSpeechRecognition")
+        self.asr.setAudioExpression(False)
+        self.asr.setVisualExpression(True)
 
         # Subscribe to the FaceDetected event:
         global memory
@@ -120,7 +124,20 @@ def main():
     time.sleep(3)
     SpeachRec.atts.say("Hello, I am Nao... Do you wan't to play a game?", configuration)
 
-    raw_input('Yes or no')
+    SpeachRec.asr.pause(True)
+    SpeachRec.asr.setVocabulary(['Yes','No'], False)
+    SpeachRec.asr.pause(False)
+    SpeachRec.lastWord = ''
+
+    SpeachRec.asr.subscribe('Test_ASR')
+    while SpeachRec.lastWord == '':
+        time.sleep(0.2)
+    SpeachRec.asr.unsubscribe('Test_ASR')
+
+    if SpeachRec.lastWord == 'No':
+        SpeachRec.atts.say("I don't care.... Let's play anyway...", configuration)
+
+    print('You Said: ' + str(SpeachRec.lastWord))
 
     try:
         while (not isDefeat and not isVictory):
@@ -152,14 +169,17 @@ def main():
                     
             elif action == "choice":
                 g.scenario.game_state.vocabulary
-                SpeachRec.asr.pause(True)
+                
                 vocabulary = g.scenario.game_state.vocabulary
+
+                SpeachRec.asr.pause(True)
+                time.sleep(0.1)
+                SpeachRec.asr.setVocabulary(vocabulary, False)
+                time.sleep(0.1)
+                SpeachRec.asr.pause(False)
 
                 SpeachRec.atts.say('Your options are:...')
                 SpeachRec.atts.say('....'.join(vocabulary))
-                
-                SpeachRec.asr.setVocabulary(vocabulary, False)
-                SpeachRec.asr.pause(False)
                 SpeachRec.lastWord = ''
 
                 SpeachRec.asr.subscribe('Test_ASR')

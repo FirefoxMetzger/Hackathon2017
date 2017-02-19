@@ -24,11 +24,11 @@ class Mountain:
 		return self.game_state.isDefeat
 		
 class SubMountain:
-	message = """Imagine you are a swordsman. You have gone in many adventures 
-				and this is your latest... You are now. standing on top of a
+	message = """You are the great swordsman. Azriel... You have been in many adventures 
+				and seen many dangers... This is your latest quest... after searching for many years you have found what you are looking for... you have traveled for many days and you are here now ready to battle... you stand on top of a
 				mountain... to your left there is a dark and misty forest... 
-				To your right there is an ancient castle... which way will you
-				go?... To the castle?... or to the forest?..."""
+				To your right there is an ancient castle... you can either go to the castle...
+				or to the forest..."""
 	action = "choice"
 	isVictory = False
 	isDefeat = False
@@ -41,9 +41,9 @@ class SubMountain:
 			return SubForest()
 			
 class SubForest:
-	message = """You walk in to the forest.. it looks dark... ancient trees grow 
-				in there... you feel as if they are looking down at you... will you 
-				enter the forest or... walk along the forest."""
+	message = """You walk in to the forest.. it looks dark and very old... trees that grow there are from the begining of time it self.... you have heard many stories about the dangers  of the forest...
+				after some time... you feel as if some one is watching you at you... will you 
+				enter the forest.... or. walk along the forest..."""
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -51,7 +51,7 @@ class SubForest:
 		return SubForest()
 
 class SubCastle:
-	message = """You have taken the path to the castle.. you come to a stop at the gate.. you can either enter the castle.. or go round and walk through the garden.. would you enter... Or go to the garden.."""
+	message = """You have taken the path to the castle.... you come to a stop at the gate... you can either enter the castle... or go round and walk through the garden.. .would you enter... Or go to the garden.."""
 	action = "none"
 	isVictory = False
 	isDefeat = False
