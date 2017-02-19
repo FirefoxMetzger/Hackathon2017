@@ -24,8 +24,8 @@ class Forest:
 		return self.game_state.isDefeat
 		
 class SubForest:
-	message = """You walk in to the forest… it looks dark… ancient trees grow 
-				in there… you feel as if they are looking down at you… will you 
+	message = """You walk in to the forest... it looks dark... ancient trees grow 
+				in there... you feel as if they are looking down at you... will you 
 				enter the forest or... walk along the forest."""
 	vocabulary = ['into forest','border']
 	action = "choice"
@@ -38,9 +38,9 @@ class SubForest:
 			return SubCamp()	
 
 class SubSpider:
-	message = """you are walking deep in to the forest… you hear a noise... 
-				you look around… there is a massive spider waiting to attack 
-				you. Will you fight it… Or will you run away…"""
+	message = """you are walking deep in to the forest... you hear a noise... 
+				you look around... there is a massive spider waiting to attack 
+				you. Will you fight it... Or will you run away..."""
 	action = "choice"
 	vocabulary = ['fight','flight']
 	isVictory = False
@@ -73,9 +73,9 @@ class SubSpiderForceFight:
 		return SubSpiderFight()	
 		
 class SubSpiderRunFail:
-	message = """But you slip on a banana peel. And fall on your face… 
-				when you turn around the spider is almost upon you… you 
-				are forced to fight…"""
+	message = """But you slip on a banana peel. And fall on your face... 
+				when you turn around the spider is almost upon you... you 
+				are forced to fight..."""
 	action = "none"
 	isVictory = False
 	isDefeat = True
@@ -115,9 +115,9 @@ class SubSpiderFight():
 		return self
 			
 class SubSpiderWin:
-	message = """YES… you managed a critical hit and Spider is Dead…  you walk 
-				past it’s body. After several hours you stumble upon a road… 
-				you are releaved…"""
+	message = """YES... you managed a critical hit and Spider is Dead...  you walk 
+				past it's body... After several hours you stumble upon a road... 
+				you are releaved..."""
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -125,7 +125,7 @@ class SubSpiderWin:
 		return SubRoad()
 		
 class SubSpiderDie:
-	message = """I am so sorry but the spider manage to sting you… you die… slowly…"""
+	message = """I am so sorry but the spider manage to sting you... you die... slowly..."""
 	action = "none"
 	isVictory = False
 	isDefeat = True
@@ -134,7 +134,7 @@ class SubSpiderDie:
 			
 			
 class SubCamp:
-	message = """You are walking along the border of the forest and you come upon a campfire… there is a bore roasting over the fire… there is a tent… and you notice a chest… you are interested in the chest… Would you wait for the owners to come back….. or.. eat the bore…. Or Try to open the chest…. Choose wisely…."""
+	message = """You are walking along the border of the forest and you come upon a campfire... there is a bore roasting over the fire... there is a tent... and you notice a chest... you are interested in the chest... Would you wait for the owners to come back..... or.. eat the bore.... Or Try to open the chest.... Choose wisely...."""
 	action = "choice"
 	vocabulary = ['wait','eat','steal']
 	isVictory = False
@@ -148,7 +148,7 @@ class SubCamp:
 			return SubCampLock()
 			
 class SubCampWait:
-	message = """The people turn out to be robbers… and they are not happy to see you… Now you have to fight them…."""
+	message = """The people turn out to be robbers... and they are not happy to see you... Now you have to fight them...."""
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -156,7 +156,7 @@ class SubCampWait:
 		return SubBandit()
 		
 class SubCampEat:
-	message = """You eat the bore… you feel sleepy and fall asleep… when you wake up the owners have arrıved to the camp and they are band of thieves.  Now you have to fıght them to death…."""
+	message = """You eat the bore... you feel sleepy and fall asleep... when you wake up the owners have arrived to the camp and they are band of thieves.  Now you have to fight them to death...."""
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -164,7 +164,7 @@ class SubCampEat:
 		return SubBandit()
 
 class SubCampLock:
-	message = """You try to pıck the lock for several mınutes wıthout success… then you try to break open the box… when you manage to open ıt… you fınd out that ıt ıs empty… you hear a sound… when you look around you see the owners of the camp has returned… they are robbers and they are angry… you have to fıght them…"""
+	message = """You try to pick the lock for several minutes without success... then you try to break open the box... when you manage to open it... you find out that it is empty... you hear a sound... when you look around you see the owners of the camp has returned... they are robbers and they are angry... you have to fight them..."""
 	action = "SuccessRoll"
 	isVictory = False
 	isDefeat = False
@@ -358,7 +358,7 @@ class SubBanditDie:
 		return SubBanditDie()
 		
 class SubRoad:
-	message = """ you walk along the road and reach a cross road… will you go left… or right… """
+	message = """ you walk along the road and reach a cross road... will you go left... or right... """
 	action = "choice"
 	vocabulary = ['right','left']
 	isVictory = False
@@ -370,10 +370,10 @@ class SubRoad:
 			return SubMerchant()
 			
 class SubMerchant:
-	message = """you take the left path and start walking… after some time. 
-				You hear something close in front of you… It is a merchant 
-				who seem to be very wealthy… you can either rob and steal 
-				his goods or ask him for his help… """
+	message = """you take the left path and start walking... after some time. 
+				You hear something close in front of you... It is a merchant 
+				who seem to be very wealthy... you can either rob and steal 
+				his goods or ask him for his help... """
 	action = "choice"
 	vocabulary = ['steal','ask']
 	isVictory = False
@@ -385,7 +385,7 @@ class SubMerchant:
 			return SubMerchantAsk()
 			
 class SubMerchantRob:
-	message = """You sneak up behind him and ambush him… Shuffle your cards and show me… lets see if you succeeded or not…"""
+	message = """You sneak up behind him and ambush him... Shuffle your cards and show me... lets see if you succeeded or not..."""
 	action = "SuccessRoll"
 	isVictory = False
 	isDefeat = False
@@ -396,8 +396,8 @@ class SubMerchantRob:
 			return SubMerchantRobFail()
 			
 class SubMerchantRobSuccess:
-	message = """you managed to successfully subdue the merchant… 
-				He has a large amount of money …"""
+	message = """you managed to successfully subdue the merchant... 
+				He has a large amount of money ..."""
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -405,8 +405,8 @@ class SubMerchantRobSuccess:
 		return SubSolider()
 		
 class SubMerchantRobFail:
-	message = """you find out merchants dark secret… he is a slaver… 
-				he takes you captive as a slave… """
+	message = """you find out merchants dark secret... he is a slaver... 
+				he takes you captive as a slave... """
 	action = "none"
 	isVictory = False
 	isDefeat = True
@@ -414,9 +414,9 @@ class SubMerchantRobFail:
 		return SubMerchantRobFail()
 			
 class SubMerchantAsk:
-	message = """you learn a dark secret about the merchant… he is a slaver… 
-				he has a large number of slaves in his wagon… you are obligated 
-				to free the slaves…"""
+	message = """you learn a dark secret about the merchant... he is a slaver... 
+				he has a large number of slaves in his wagon... you are obligated 
+				to free the slaves..."""
 	action = "choice"
 	vocabulary = ['free','ignore']
 	isVictory = False
@@ -428,8 +428,8 @@ class SubMerchantAsk:
 			return SubMerchantAskIgnore()
 			
 class SubMerchantAskFree:
-	message = """Lets see if you can free the slaves… shuffle the cards and 
-				pick one... and show it to me…"""
+	message = """Lets see if you can free the slaves... shuffle the cards and 
+				pick one... and show it to me..."""
 	action = "SuccessRoll"
 	isVictory = False
 	isDefeat = False
@@ -440,9 +440,9 @@ class SubMerchantAskFree:
 			return SubMerchantRobFail()
 		
 class SubMerchantAskFreeSuccess:
-	message = """You free the slaves … you bound the slaver… one of the slaves 
-				turn out to be a soldier… he tells you to go to a nearby town 
-				where the town people needs you…"""
+	message = """You free the slaves ... you bound the slaver... one of the slaves 
+				turn out to be a soldier... he tells you to go to a nearby town 
+				where the town people needs you..."""
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -458,7 +458,7 @@ class SubMerchantAskIgnore:
 		return SubSolider()
 			
 class SubSolider:
-	message = """You take the right path… after some hours you meat a soldier… the soldier tells you that you are needed in to the small town that lies ahead…"""
+	message = """You take the right path... after some hours you meat a soldier... the soldier tells you that you are needed in to the small town that lies ahead..."""
 	action = "none"
 	isVictory = False
 	isDefeat = False
