@@ -34,7 +34,7 @@ class SubForest:
 	def nextState(self, action):
 		if action == "into forest":
 			return SubSpider()
-		elif action == "along border":
+		elif action == "border":
 			return SubCamp()	
 
 class SubSpider:
@@ -42,13 +42,13 @@ class SubSpider:
 				and when you turn around... there is a massive spider waiting to attack 
 				you... Will you fight it... Or will you run away..."""
 	action = "choice"
-	vocabulary = ['fight','run away']
+	vocabulary = ['fight','Run away']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
 		if action == "fight":
 			return SubSpiderFight()
-		elif action == "run away":
+		elif action == "Run away":
 			return SubSpiderFlight()
 			
 class SubSpiderFlight:
@@ -205,13 +205,13 @@ class SubCampLockFail:
 class SubBandit:
 	message = "The people turn out to be robbers... and they are not happy to see you... Now you have to fight them.... or run away."
 	action = "choice"
-	vocabulary = ['flight','run away']
+	vocabulary = ['flight','fight']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
 		if action == "flight":
 			return SubBanditFlight()
-		elif action == "run away":
+		elif action == "fight":
 			return SubBanditFight()
 			
 class SubBanditFlight:
@@ -335,11 +335,11 @@ class SubBanditFight():
 		elif self.hp <= 0:
 			return SubBanditDie()
 		elif self.hp == 3:
-			self.message = "Very Healthy"
+			self.message = "you jump in to a tree branch and swing yourself up... you run along the branch... jump and stab the robber through the head.."
 		elif self.hp == 2:
-			self.message = "Small wound"
+			self.message = "you swing and you miss..."
 		elif self.hp == 1:
-			self.message = "Heavily wounded"
+			self.message = "you swing... "
 		
 		return self
 		
@@ -431,7 +431,7 @@ class SubMerchantAsk:
 			
 class SubMerchantAskFree:
 	message = """Lets see if you can free the slaves... shuffle the cards and 
-				pick one... and show it to me..."""
+				pick one... and show it to me...""" 
 	action = "SuccessRoll"
 	isVictory = False
 	isDefeat = False
@@ -460,7 +460,7 @@ class SubMerchantAskIgnore:
 		return SubSolider()
 			
 class SubSolider:
-	message = """You take the right path... after some hours you meat a soldier... the soldier ask you a riddle.... you are tired and wounded... you have no time for riddles... you slap the idiot couple of times.. and get the information you need... finaly you know your goal is in the nearby town..."""
+	message = """after some hours you meat a soldier... the soldier ask you a riddle.... you are tired and wounded... you have no time for riddles... you slap the idiot couple of times.. and get the information you need... finaly you know your goal is in the nearby town..."""
 	action = "none"
 	isVictory = False
 	isDefeat = False

@@ -472,7 +472,7 @@ class SubMazeStarve:
         return SubMazeStarve()
 
 class SubMazeEscape:
-    message = "You manage to escape barely and continue zour journey along the road."
+    message = "You manage to escape barely and continue your journey along the road."
     action = "none"
     isVictory = False
     isDefeat = False
@@ -504,7 +504,7 @@ class SubWolfRunEpicFail:
         return SubWolfRunEpicFail()
 
 class SubHelpChild:
-    message = "You try to help the child."
+    message = "You feel bad for the child... I mean.. it was stupid for a child to walk to a ruined castle alone... his parents must be really irresponsible.... Anyway.. you decide to try and save the child... touch my body to save the child."
     action = "SuccessRoll"
     isVictory = False
     isDefeat = False
@@ -517,7 +517,7 @@ class SubHelpChild:
                 return SubHelpCriticalFail()
 
 class SubHelpChildSuccess:
-    message = "You rescue the child and it runs away. You continue and exit the garden."
+    message = " You use your mighty sword to cut the thorn bush and save the child.... The child is happy... he walks you to the exit of the garden..."
     action = "none"
     isVictory = False
     isDefeat = False
@@ -525,7 +525,7 @@ class SubHelpChildSuccess:
         return SubExitGarden()
 
 class SubHelpChildFail:
-    message = "The child dies as you try to save it. You exit the garden"
+    message = "You use your sword to cut the thorn bush.... But it feels like it might be too dangerous.... So you grab his hands and pull him out.... When he is out you notice that it is too late... when you pulled the child out the thorns had torn his side.... I'm sorry but he dies... but with his dying breath he tells you how to get out of the garden...."
     action = "none"
     isVictory = False
     isDefeat = False
@@ -533,7 +533,7 @@ class SubHelpChildFail:
         return SubExitGarden()
         
 class SubHelpCriticalFail:
-    message = "You fail miserably and trap yourself in the thorns."
+    message = "You are pulling the child out... suddenly a thorn pokes you in the eye.... You start screaming and blindly run around.... You fall into a nearby well.... And die..."
     action = "none"
     isVictory = False
     isDefeat = True
@@ -541,7 +541,7 @@ class SubHelpCriticalFail:
         return SubHelpCriticalFail
 
 class SubCemetry:
-    message = "You encounter a scarry looking ghost. Run away or engage?"
+    message = "You walk towards the cemetery.... You look around ... it is gloomy and foreboding.... Lot of old trees and gravestones lay about.... You notice the gate to exit the cemetery on the other side of the graveyard... you start walking towards it through the gravestones.... Suddenly a howling wind blows and it becomes very cold.... A ghostly figure appear s before you... would you run... or engage"
     action = "choice"
     isVictory = False
     isDefeat = False
@@ -553,7 +553,7 @@ class SubCemetry:
             return SubGardenGhostRun()
 
 class SubGardenGhostEngage:
-    message = "The ghost tells you a riddle. Answer coffin."
+    message = "The ghost says ... Who makes it... has no need of it..... who buys it... has no use for it.... Who.. uses it... can neither see.. nor feel it.... I have one as well.... Answer this riddle and I... will let you pass.. or else..."
     action = "choice"
     vocabulary = ['coffin', 'chair', 'time', 'riddle']
     isVictory = False
@@ -573,7 +573,7 @@ class SubGardenGhostSuccess:
         return SubExitGarden()
 
 class SubExitGarden:
-    message = "You exit the garden and follow the road."
+    message = "The ghost is satisfied... and he disappears and the path becomes clear...you walk to the gate and exit the graveyard... "
     action = "none"
     isVictory = False
     isDefeat = False
@@ -581,7 +581,7 @@ class SubExitGarden:
         return SubFollowRoad()
 
 class SubGardenGhostRun:
-    message = "You try to run away from the ghost."
+    message = "You try... to run away from the ghost... touch my body to see what happed next..."
     action = "SuccessRoll"
     isVictory = False
     isDefeat = False
@@ -592,7 +592,7 @@ class SubGardenGhostRun:
             return SubGardenGhostDead()
 
 class SubGardenGhostDead:
-    message = "The ghost causes you to fall into madness."
+    message = "The ghost curses you... and you start to run across the graveyard... suddenly you trip over a grave and hit your head on a grave stone... and you die..."
     action = "none"
     isVictory = False
     isDefeat = True
@@ -600,7 +600,7 @@ class SubGardenGhostDead:
         return SubGardenGhostDead()
 
 class SubFollowRoad:
-    message = "You are on a road splot. Left or right?"
+    message = "you are on the cross roads... Left... or right?"
     action = "choice"
     vocabulary = ['left','right']
     isVictory = False
@@ -612,7 +612,7 @@ class SubFollowRoad:
             return SubFollowRoadRight()
 
 class SubFollowRoadLeft:
-    message = "You see a beautiful landside."
+    message = "You see a beautiful landscape... it reminds you the stories you heard about valhalla..."
     action = "none"
     isVictory = False
     isDefeat = False
@@ -620,7 +620,7 @@ class SubFollowRoadLeft:
         return SubSolider()
 
 class SubFollowRoadRight:
-    message = "You see a beautiful sunset."
+    message = "You see a beautiful sunset... it is so beautiful. it makes you cry..."
     action = "none"
     isVictory = False
     isDefeat = False
@@ -628,7 +628,7 @@ class SubFollowRoadRight:
         return SubSolider()
 
 class SubSolider:
-    message = "A soldider  tasks you with an important mission. Go to Manison"
+    message = "after some hours you meat a soldier... the soldier ask you a riddle.... you are tired and wounded... you have no time for riddles... you slap the idiot couple of times.. and get the information you need... finaly you know your goal is in the nearby town..."
     action = "none"
     isVictory = False
     isDefeat = False

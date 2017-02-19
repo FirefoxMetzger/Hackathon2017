@@ -43,7 +43,7 @@ class SpeachRecModule(ALModule):
         self.motion = ALProxy("ALMotion") 
         self.posture = ALProxy("ALRobotPosture")
         self.touch = ALProxy("ALTouch")
-        self.tts.setVolume(0.6)
+        self.tts.setVolume(0.8)
 
         self.tts.setParameter('speed', 83)
 
@@ -113,12 +113,6 @@ def main():
     global SpeachRec
     SpeachRec = SpeachRecModule("SpeachRec")
 
-    #setup game
-    isVictory = False
-    isDefeat = False
-        
-    g = GameEngine()
-
     SpeachRec.motion.wakeUp()
     configuration = {"bodyLanguageMode":"contextual"}
     time.sleep(3)
@@ -137,72 +131,106 @@ def main():
     if SpeachRec.lastWord == 'No':
         SpeachRec.atts.say("I don't care.... Let's play anyway...", configuration)
 
-    print('You Said: ' + str(SpeachRec.lastWord))
-
+    #setup game
     try:
-        while (not isDefeat and not isVictory):
-            msg = g.getNextMessage()
-            action = g.getStateAction()
-            
-##            #DEBUG MESSAGE
-##            print("Scenario is: "+ g.game_state)
-##            print("Action is: " +action)
-##            print(g.scenario.game_state)
-##            print(msg)
-            
-            SpeachRec.atts.say(msg,configuration)
-            
-            if action == "combat":
-                SpeachRec.tts.say('Touch me .. to influence combat..')
-                time.sleep(2)
-                print(SpeachRec.lastTouch)
-                next_state = 100*random()
-                if next_state < 20:
-                    next_state = "great success"    
-                elif next_state < 70:
-                    next_state = "success"
-                elif next_state < 90:
-                    next_state = "fail"
+        isPlayAgain = True
+        while isPlayAgain:
+        
+            isVictory = False
+            isDefeat = False
+                
+            g = GameEngine()
+
+            while (not isDefeat and not isVictory):
+                msg = g.getNextMessage()
+                action = g.getStateAction()
+                
+    ##            #DEBUG MESSAGE
+    ##            print("Scenario is: "+ g.game_state)
+    ##            print("Action is: " +action)
+    ##            print(g.scenario.game_state)
+    ##            print(msg)
+                
+                SpeachRec.atts.say(msg,configuration)
+                
+                if action == "combat":
+                    SpeachRec.tts.say('Touch me .. to influence combat..')
+                    time.sleep(2)
+                    print(SpeachRec.lastTouch)
+                    next_state = 100*random()
+                    if next_state < 20:
+                        next_state = "great success"    
+                    elif next_state < 70:
+                        next_state = "success"
+                    elif next_state < 90:
+                        next_state = "fail"
+                    else:
+                        next_state = "epic fail"
+                        
+                        
+                elif action == "choice":
+                    g.scenario.game_state.vocabulary
+                    
+                    vocabulary = g.scenario.game_state.vocabulary
+
+                    SpeachRec.asr.pause(True)
+                    time.sleep(0.1)
+                    SpeachRec.asr.setVocabulary(vocabulary, False)
+                    time.sleep(0.1)
+                    SpeachRec.asr.pause(False)
+
+                    SpeachRec.atts.say('Your options are:...')
+                    SpeachRec.atts.say('....'.join(vocabulary))
+                    SpeachRec.lastWord = ''
+
+                    SpeachRec.asr.subscribe('Test_ASR')
+                    while SpeachRec.lastWord == '':
+                        time.sleep(0.2)
+                    SpeachRec.asr.unsubscribe('Test_ASR')
+
+                    print('You Said: ' + str(SpeachRec.lastWord))
+                    next_state = SpeachRec.lastWord
+                    
+                elif action == "SuccessRoll":
+                    next_state = random()
+                    print('RNGsus decides for a: '+str(next_state))
+                elif action == "none":
+                        next_state = 0
+                         
                 else:
-                    next_state = "epic fail"
-                    
-                    
-            elif action == "choice":
-                g.scenario.game_state.vocabulary
+                        raise Exception("Wrong Action.")
+                        
+                g.nextState(next_state)
                 
-                vocabulary = g.scenario.game_state.vocabulary
-
-                SpeachRec.asr.pause(True)
-                time.sleep(0.1)
-                SpeachRec.asr.setVocabulary(vocabulary, False)
-                time.sleep(0.1)
-                SpeachRec.asr.pause(False)
-
-                SpeachRec.atts.say('Your options are:...')
-                SpeachRec.atts.say('....'.join(vocabulary))
-                SpeachRec.lastWord = ''
-
-                SpeachRec.asr.subscribe('Test_ASR')
-                while SpeachRec.lastWord == '':
-                    time.sleep(0.2)
-                SpeachRec.asr.unsubscribe('Test_ASR')
-
-                print('You Said: ' + str(SpeachRec.lastWord))
-                next_state = SpeachRec.lastWord
+                isVictory = g.isVictory()
+                isDefeat = g.isDefeat()
                 
-            elif action == "SuccessRoll":
-                next_state = random()
-                print('RNGsus decides for a: '+str(next_state))
-            elif action == "none":
-                    next_state = 0
-                     
+            if isVictory:
+                    print(g.getNextMessage())
+                    SpeachRec.atts.say(g.getNextMessage())
+                    print("Concrats You Win!!")
+                    SpeachRec.tts.say('Congrats You Win!.. Badass')
             else:
-                    raise Exception("Wrong Action.")
-                    
-            g.nextState(next_state)
-            
-            isVictory = g.isVictory()
-            isDefeat = g.isDefeat()
+                    print(g.getNextMessage())
+                    SpeachRec.atts.say(g.getNextMessage())
+                    print("You Lose!")
+                    SpeachRec.tts.say('You Lose!')
+
+            SpeachRec.atts.say("Do you wish to play again?", configuration)
+            SpeachRec.asr.pause(True)
+            SpeachRec.asr.setVocabulary(['Yes','No'], False)
+            SpeachRec.asr.pause(False)
+            SpeachRec.lastWord = ''
+
+            SpeachRec.asr.subscribe('Test_ASR')
+            while SpeachRec.lastWord == '':
+                time.sleep(0.2)
+            SpeachRec.asr.unsubscribe('Test_ASR')
+
+            if SpeachRec.lastWord == 'No':
+                isPlayAgain = False
+
+        SpeachRec.atts.say("You .. are .. weak.", configuration)
     except KeyboardInterrupt:
         print
         print "Interrupted by user, shutting down"
@@ -215,18 +243,7 @@ def main():
         myBroker.shutdown()
         sys.exit(0)
 
-    if isVictory:
-                print(g.getNextMessage())
-                SpeachRec.atts.say(g.getNextMessage())
-                print("Concrats You Win!!")
-                SpeachRec.tts.say('Congrats You Win!.. Badass')
-    else:
-                print(g.getNextMessage())
-                SpeachRec.atts.say(g.getNextMessage())
-                print("You Lose!")
-                SpeachRec.tts.say('You Lose!')
-
-
+        #play again
 
 if __name__ == "__main__":
     main()
