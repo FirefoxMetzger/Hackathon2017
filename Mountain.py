@@ -49,7 +49,7 @@ class SubForest:
 		return SubForest()
 
 class SubCastle:
-	message = "Going into Castle"
+	message = """You have taken the path to the castle… you come to a stop at the gate… you can either enter the castle… or go round and walk through the garden… would you enter…. Or go to the garden…"""
 	action = "none"
 	isVictory = False
 	isDefeat = False

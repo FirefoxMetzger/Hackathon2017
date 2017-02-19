@@ -24,7 +24,7 @@ class Town:
 		return self.game_state.isDefeat
 		
 class subCasle:
-	message = "You are going into an ancient castle ruin. Go inside or into garden?"
+	message = """You have taken the path to the castle… you come to a stop at the gate… you can either enter the castle… or go round and walk through the garden… would you enter…. Or go to the garden…"""
 	action = "choice"
 	isVictory = False
 	isDefeat = False
@@ -35,7 +35,7 @@ class subCasle:
 			return SubGarden()
 
 class subInside:
-	message = "You are inside the castle. Go upstairs, downstairs or through door?"
+	message = """you push open the door… it slowly opens in… you walk inside… it seems that someone was living in the castle… you look around… when you look up you see a staircase leading up to another floor… you look around and see what looks like the kitchen… also. You see another trap door leading to what looks like the cellar… where will you go… upstairs… kitchen… or… cellar…"""
 	action = "choice"
 	isVictory = False
 	isDefeat = False
@@ -48,7 +48,7 @@ class subInside:
 			return SubWitchLair()
 	
 class SubHallway:
-	message = "You go upstairs into the hallway. Left door or right?"
+	message = """you climb the staircase slowly… you are careful not to make any noise… you see two doors… which one would you take… left door or right… """
 	action = "choice"
 	isVictory = False
 	isDefeat = False
@@ -59,7 +59,7 @@ class SubHallway:
 			return SubGargoyle()
 
 class SubCastleGhost:
-	message = "You are scared and run away from the ghost."
+	message = """you walk through the door slowly and carefully… you hear a noise and look around… dark figure emerges from the shadows…"""
 	action = "SuccessRoll"
 	isVictory = False
 	isDefeat = False
@@ -78,7 +78,7 @@ class SubTripAndDie:
 		return SubTripAndDie()
 			
 class SubGargoyle:
-	message = "You run into a Gargoyle. Fight or run?"
+	message = """You push the door open and walk in… you hear something behind you… you see a figure moving towards you… it’s a pale ghost screaming and reaching for you… you run away… """
 	action = "choice"
 	isVictory = False
 	isDefeat = False
@@ -89,7 +89,7 @@ class SubGargoyle:
 			return SubGargoyleRun()
 			
 class SubGargoyleRun:
-	message = "You try to run away."
+	message = """Shuffle the Cards and Show me"""
 	action = "SuccessRoll"
 	isVictory = False
 	isDefeat = False
@@ -102,7 +102,7 @@ class SubGargoyleRun:
 			return SubGargoyleRunSuccess()
 			
 class SubGargoyleEscape:
-	message = "You succeed in running away."
+	message = """You manage to run away… you run through a door.. And manage to jump through a window and land in the garden…"""
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -110,7 +110,7 @@ class SubGargoyleEscape:
 		return SubMaze()
 			
 class SubGargoyleRunFail:
-	message = "You can't escape the Gargoyle slacker. You have to fight."
+	message = """you run away… and jump over a ladder and see a dark figure… you come closer and notice that it is a large gargoyle… will you fight or run away…"""
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -118,7 +118,7 @@ class SubGargoyleRunFail:
 		return SubGargoyleFight()
 			
 class SubGargoyleRunEpicFail:
-	message = "You die miserably, because you are hit by a rock."
+	message = """You run away… you hear a scream and look  over your shoulder… suddenly  you run out of ground and fall off the roof…. And die.."""
 	action = "none"
 	isVictory = False
 	isDefeat = True
@@ -126,7 +126,7 @@ class SubGargoyleRunEpicFail:
 		return SubGargoyleRunEpicFail()
 
 class SubGargoyleFight:
-	message = "You face the Gargoyle in combat"
+	message = """Shuffle cards"""
 	action = "combat"
 	isVictory = False
 	isDefeat = False
@@ -176,7 +176,7 @@ class SubGargoyleFightLose:
 
 			
 class SubKitchen:
-	message = "You go straight into the kitchen. Drink or eat?"
+	message = """You enter the kitchen slowly and carefully…. You look around… you see… food and drink on the table… would you eat… or would you drink… """
 	action = "choice"
 	isVictory = False
 	isDefeat = False
@@ -187,7 +187,7 @@ class SubKitchen:
 			return SubKitchenDrink()
 
 class SubKitchenFood:
-	message = "The food was rotten. You die!"
+	message = """You eat the delicious food… it is very tasty… after few minutes you feel different… suddenly you start coughing blood… you realise you have been poisoned… you die… """
 	action = "none"
 	isVictory = False
 	isDefeat = True
@@ -196,7 +196,8 @@ class SubKitchenFood:
 
 			
 class SubWitchLair:
-	message = "You find a witch lair. Fight, steal or retreat?"
+	message = """You  open the cellar door and climb down the stairs slowly and carefully… you see some one muttering over a fire… it is an old woman with white hair wearing rags…. Suddenly you realise she is a witch…. you also noticed there is a large gem stone on a shelf…
+You can go back without the witch seeing you… or you can steal the gem stone… what are you going to do… go back … or steal the gem.."""
 	action = "choice"
 	isVictory = False
 	isDefeat = False
@@ -209,7 +210,7 @@ class SubWitchLair:
 			return SubBack()		
 
 class subGarden:
-	message = "You are in te garden. Move through flowers or towards cemetry?"
+	message = """you walk around the castle… you reach a hedge and walk through an opening… you look around and notice that you have arrived in a garden… you start to walk among the trees you come to a cross road… one road leads to the garden other leads to the cemetery…. Which one will you take…. Cemetery or… the garden…"""
 	action = "choice"
 	isVictory = False
 	isDefeat = False
