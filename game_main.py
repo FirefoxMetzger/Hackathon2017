@@ -135,8 +135,9 @@ def main():
                     
                     
             elif action == "choice":
+                g.scenario.game_state.vocabulary
                 SpeachRec.asr.pause(True)
-                vocabulary = ["yes", "no", "please", "hello"]
+                vocabulary = g.scenario.game_state.vocabulary
                 SpeachRec.asr.setVocabulary(vocabulary, False)
                 SpeachRec.asr.pause(False)
                 SpeachRec.lastWord = ''
@@ -145,8 +146,9 @@ def main():
                 while SpeachRec.lastWord == '':
                     time.sleep(0.2)
                 SpeachRec.asr.unsubscribe('Test_ASR')
-                
-                next_state = raw_input("Enter phrase in \"__\" (double underscore): ")
+
+                print('You Said: ' + str(SpeachRec.lastWord))
+                next_state = SpeachRec.lastWord
                 
             elif action == "SuccessRoll":
                     rng = random()

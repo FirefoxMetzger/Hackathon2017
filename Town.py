@@ -22,6 +22,7 @@ class Town:
 class SubTown:
 	message = "Town Message"
 	action = "choice"
+	vocabulary = ['Manson', 'Armory', 'Alchemist']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
@@ -35,6 +36,7 @@ class SubTown:
 class SubManson:
 	message = "Manson Message"
 	action = "choice"
+	vocabulary = ['break in', 'talk guard', 'fight']
 	isVictory = False
 	isDefeat = False
 		
@@ -42,7 +44,7 @@ class SubManson:
 		if action == "break in":
 			print("test")
 			return SuccessRollManson()
-		elif action == "talk_guard":
+		elif action == "talk guard":
 			return SubTown()
 		elif action == "fight":
 			return subMansonFight()
@@ -61,12 +63,12 @@ class SuccessRollManson:
 			
 class SubMansonDie:
 	message = "You break your legs and die"
-	action = "choice"
+	action = "none"
 	isVictory = False
 	isDefeat = True
 		
 	def nextState(self, action):
-		pass
+		return SubMansonDie()
 		
 class SubMansonGuards:
 	message = "You climb over fence, but guards inside spot you. You go to jail."
@@ -120,19 +122,20 @@ class subMansonFight:
 		
 class WinSubMansonFight:
 	message = "You smash guards. Call reinforcement you go to jail"
-	action = "choice"
+	action = "none"
 	isVictory = False
 	isDefeat = True
 
 class DieSubMansonFight:
 	message = "You die fighting the Guards in front of the Manson."
-	action = "choice"
+	action = "none"
 	isVictory = False
 	isDefeat = True
 	
 class SubArmory:
 	message = "Armory Message"
 	action = "choice"
+	vocabulary = ['ask guard', 'break in']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
@@ -172,6 +175,7 @@ class SubArmoryBreakInFail:
 class SubArmoryBreakInSuccess():
 	message = "Succeed breaking into armory. Steal what?"
 	action = "choice"
+	vocabulary = ['shield', 'armor', 'locked chest']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
@@ -209,6 +213,7 @@ class SubArmoryLockedChest():
 class SubMansonWithArmor():
 	message = "At Manson With armor."
 	action = "choice"
+	vocabulary = ['intimidate', 'fight']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
@@ -288,16 +293,15 @@ class SubMansonArmorFightDie:
 class SubAlchemist:
 	message = "Alchemist Message"
 	action = "choice"
+	vocabulary = ['black potion', 'blue potion', 'green potion']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
 		if action == "black potion":
 			return SubBlackPotion()
 		elif action == "blue potion":
-			# NEED TO DEFINE CHANCE CLASS
 			return SubBluePotion()
 		elif action == "green potion":
-			# NEED TO DEFINE CHANCE CLASS
 			return SubGreenPotion()
 			
 class SubBlackPotion:
@@ -311,6 +315,7 @@ class SubBlackPotion:
 class SubBluePotion:
 	message = "You feel strong, but also poisoned"
 	action = "choice"
+	vocabulary = ['ignore', 'antidote']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
@@ -323,6 +328,7 @@ class SubMansonPoisoned:
 	message = ("You decide to ignore your feeling and go to the Manson.",
 	"When you arrive you can barely stand and feel like throwing up.")
 	action = "choice"
+	vocabulary = ['Town', 'talk guard']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
@@ -334,7 +340,7 @@ class SubMansonPoisoned:
 class SubMansonPoisonedDie:
 	message = ("You faint on your way.",
 	"Ignoring poison is a bad idea. You are dead.")
-	action = "choice"
+	action = "none"
 	isVictory = False
 	isDefeat = True
 	def nextState(self, action):
@@ -343,6 +349,7 @@ class SubMansonPoisonedDie:
 class SubPoorChild:
 	message = "You find a poor child, which happens to have the antidote."
 	action = "choice"
+	vocabulary = ['steal', 'ask']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
@@ -354,6 +361,7 @@ class SubPoorChild:
 class SubPoorChildAsk:
 	message = "She woun't give you the antidote, she has to cure her grandma."
 	action = "choice"
+	vocabulary = ['steal', 'kill']
 	isVictory =False
 	isDefeat = False
 	def nextState(self, action):
@@ -385,6 +393,7 @@ class SubPoorChildKill:
 class SubMansonStrength:
 	message = "You managed to cure your poison and head for the manson."
 	action = "choice"
+	vocabulary = ['jump', 'fight']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):

@@ -28,6 +28,8 @@ class SubMountain:
 	action = "choice"
 	isVictory = False
 	isDefeat = False
+
+	vocabulary = ['Castle' , 'Forest']
 	def nextState(self, action):
 		if action == "Castle":
 			return SubCastle()

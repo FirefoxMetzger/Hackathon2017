@@ -25,6 +25,7 @@ class Forest:
 		
 class SubForest:
 	message = "You arrive at the forest border. Walk into forest or along boder?"
+        vocabulary = ['into forest','border']
 	action = "choice"
 	isVictory = False
 	isDefeat = False
@@ -37,6 +38,7 @@ class SubForest:
 class SubSpider:
 	message = "You bump into a spider."
 	action = "choice"
+	vocabulary = ['fight','flight']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
@@ -126,6 +128,7 @@ class SubSpiderDie:
 class SubCamp:
 	message = "You see a campfire."
 	action = "choice"
+	vocabulary = ['wait','eat','steal']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
@@ -192,6 +195,7 @@ class SubCampLockFail:
 class SubBandit:
 	message = "Fierce looking bandit. Fight or flight?"
 	action = "choice"
+	vocabulary = ['flight','fight']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
@@ -243,6 +247,7 @@ class SubRobbers:
 class SubScreams:
 	message = "You are lost, but you hear screams. Follow them?"
 	action = "choice"
+	vocabulary = ['follow','ignore']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
@@ -347,6 +352,7 @@ class SubBanditDie:
 class SubRoad:
 	message = "You come to a road split. Go left or right?"
 	action = "choice"
+	vocabulary = ['right','left']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
@@ -358,6 +364,7 @@ class SubRoad:
 class SubMerchant:
 	message = "You see a merchant. He didn't notie you. Steal or ask for trade?"
 	action = "choice"
+	vocabulary = ['steal','ask']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
@@ -396,6 +403,7 @@ class SubMerchantRobFail:
 class SubMerchantAsk:
 	message = "You engage the merchant. He is a slave trader. Free slaves or ignore?"
 	action = "choice"
+	vocabulary = ['free','ignore']
 	isVictory = False
 	isDefeat = False
 	def nextState(self, action):
