@@ -15,6 +15,7 @@ from naoqi import ALModule
 
 from optparse import OptionParser
 from random import random
+from random import randint
 
 NAO_IP = "192.168.1.110"
 
@@ -138,12 +139,12 @@ def main():
                 SpeachRec.tts.say('Touch me .. to influence combat..')
                 time.sleep(2)
                 print(SpeachRec.lastTouch)
-                next_state = round(4*random())
-                if next_state == "1":
-                    next_state = "great success"
-                elif next_state == "2":
+                next_state = 100*random()
+                if next_state < 20:
+                    next_state = "great success"    
+                elif next_state < 70:
                     next_state = "success"
-                elif next_state == "3":
+                elif next_state < 90:
                     next_state = "fail"
                 else:
                     next_state = "epic fail"
