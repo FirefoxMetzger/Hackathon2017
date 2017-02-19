@@ -24,7 +24,7 @@ class Castle:
         return self.game_state.isDefeat
         
 class SubCastle:
-	message = """You have taken the path to the castle… you come to a stop at the gate… you can either enter the castle… or go round and walk through the garden… would you enter…. Or go to the garden…"""
+    message = """You have taken the path to the castle.. you come to a stop at the gate.. you can either enter the castle.. or go round and walk through the garden.. would you enter... Or go to the garden.."""
     action = "choice"
     vocabulary = ['inside', 'garden']
     isVictory = False
@@ -36,7 +36,7 @@ class SubCastle:
             return SubGarden()
 
 class SubInside:
-	message = """you push open the door… it slowly opens in… you walk inside… it seems that someone was living in the castle… you look around… when you look up you see a staircase leading up to another floor… you look around and see what looks like the kitchen… also. You see another trap door leading to what looks like the cellar… where will you go… upstairs… kitchen… or… cellar…"""
+    message = """you push open the door.. it slowly opens in.. you walk inside.. it seems that someone was living in the castle.. you look around.. when you look up you see a staircase leading up to another floor.. you look around and see what looks like the kitchen.. also. You see another trap door leading to what looks like the cellar.. where will you go.. upstairs.. kitchen.. or.. cellar.."""
     action = "choice"
     vocabulary = ['upstairs', 'door', 'downstairs']
     isVictory = False
@@ -50,7 +50,7 @@ class SubInside:
             return SubWitchLair()
     
 class SubHallway:
-	message = """you climb the staircase slowly… you are careful not to make any noise… you see two doors… which one would you take… left door or right… """
+    message = """you climb the staircase slowl... you are careful not to make any noise.. you see two doors.. which one would you take.. left door or right.. """
     action = "choice"
     vocabulary = ['right', 'left']
     isVictory = False
@@ -62,7 +62,7 @@ class SubHallway:
             return SubGargoyle()
 
 class SubCastleGhost:
-	message = """you walk through the door slowly and carefully… you hear a noise and look around… dark figure emerges from the shadows…"""
+    message = """you walk through the door slowly and carefull... you hear a noise and look around.. dark figure emerges from the shadows.."""
     action = "SuccessRoll"
     isVictory = False
     isDefeat = False
@@ -81,7 +81,7 @@ class SubTripAndDie:
         return SubTripAndDie()
             
 class SubGargoyle:
-	message = """You push the door open and walk in… you hear something behind you… you see a figure moving towards you… it’s a pale ghost screaming and reaching for you… you run away… """
+    message = """You push the door open and walk in.. you hear something behind you.. you see a figure moving towards you.. it's a pale ghost screaming and reaching for you.. you run awa... """
     action = "choice"
     vocabulary = ['fight', 'run away']
     isVictory = False
@@ -93,7 +93,7 @@ class SubGargoyle:
             return SubGargoyleRun()
             
 class SubGargoyleRun:
-	message = "You try to run away."
+    message = "You try to run away."
     action = "SuccessRoll"
     isVictory = False
     isDefeat = False
@@ -103,10 +103,10 @@ class SubGargoyleRun:
         elif action < 0.75:
             return SubGargoyleRunFail()
         else:
-            return SubGargoyleRunSuccess()
+            return SubGargoyleRunEpicFail()
             
 class SubGargoyleEscape:
-	message = """You manage to run away… you run through a door.. And manage to jump through a window and land in the garden…"""
+    message = """You manage to run awa... you run through a door.. And manage to jump through a window and land in the garden.."""
     action = "none"
     isVictory = False
     isDefeat = False
@@ -114,7 +114,7 @@ class SubGargoyleEscape:
         return SubMaze()
             
 class SubGargoyleRunFail:
-	message = """you run away… and jump over a ladder and see a dark figure… you come closer and notice that it is a large gargoyle… will you fight or run away…"""
+    message = """you run awa... and jump over a ladder and see a dark figure.. you come closer and notice that it is a large gargoyle.. will you fight or run awa..."""
     action = "none"
     isVictory = False
     isDefeat = False
@@ -122,7 +122,7 @@ class SubGargoyleRunFail:
         return SubGargoyleFight()
             
 class SubGargoyleRunEpicFail:
-	message = """You run away… you hear a scream and look  over your shoulder… suddenly  you run out of ground and fall off the roof…. And die.."""
+    message = """You run awa... you hear a scream and look  over your shoulder.. suddenly  you run out of ground and fall off the roof... And die.."""
     action = "none"
     isVictory = False
     isDefeat = True
@@ -180,7 +180,7 @@ class SubGargoyleFightLose:
 
             
 class SubKitchen:
-	message = """You enter the kitchen slowly and carefully…. You look around… you see… food and drink on the table… would you eat… or would you drink… """
+    message = """You enter the kitchen slowly and carefull.... You look around.. you see.. food and drink on the table.. would you eat.. or would you drink.. """
     action = "choice"
     vocabulary = ['eat', 'drink']
     isVictory = False
@@ -192,7 +192,7 @@ class SubKitchen:
             return SubKitchenDrink()
 
 class SubKitchenFood:
-	message = """You eat the delicious food… it is very tasty… after few minutes you feel different… suddenly you start coughing blood… you realise you have been poisoned… you die… """
+    message = """You eat the delicious food.. it is very tast... after few minutes you feel different.. suddenly you start coughing blood.. you realise you have been poisoned.. you die.. """
     action = "none"
     isVictory = False
     isDefeat = True
@@ -227,8 +227,8 @@ class SubKitchenDrinkSuccess:
         return SubExitInside()  
             
 class SubWitchLair:
-	message = """You  open the cellar door and climb down the stairs slowly and carefully… you see some one muttering over a fire… it is an old woman with white hair wearing rags…. Suddenly you realise she is a witch…. you also noticed there is a large gem stone on a shelf…
-You can go back without the witch seeing you… or you can steal the gem stone… what are you going to do… go back … or steal the gem.."""
+    message = """You  open the cellar door and climb down the stairs slowly and carefull... you see some one muttering over a fire.. it is an old woman with white hair wearing rags... Suddenly you realise she is a witch... you also noticed there is a large gem stone on a shelf..
+You can go back without the witch seeing you.. or you can steal the gem stone.. what are you going to do.. go back .. or steal the gem.."""
     action = "choice"
     vocabulary = ['fight', 'steal', 'retreat']
     isVictory = False
@@ -242,7 +242,7 @@ You can go back without the witch seeing you… or you can steal the gem stone�
             return SubWitchLeave()
 
 class SubWitchLeave:
-	message = """you walk around the castle… you reach a hedge and walk through an opening… you look around and notice that you have arrived in a garden… you start to walk among the trees you come to a cross road… one road leads to the garden other leads to the cemetery…. Which one will you take…. Cemetery or… the garden…"""
+    message = """you walk around the castle.. you reach a hedge and walk through an opening.. you look around and notice that you have arrived in a garden.. you start to walk among the trees you come to a cross road.. one road leads to the garden other leads to the cemeter.... Which one will you take... Cemetery or.. the garden.."""
     action = "none"
     isVictory = False
     isDefeat = False

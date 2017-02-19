@@ -29,7 +29,7 @@ class SpeachRecModule(ALModule):
     """
 
     lastWord = ''
-    lastImage = []
+    lastTouch = []
     
     def __init__(self, name):
         ALModule.__init__(self, name)
@@ -38,6 +38,10 @@ class SpeachRecModule(ALModule):
 
         # Create a proxy to ALTextToSpeech for later use
         self.tts = ALProxy("ALTextToSpeech")
+        self.atts = ALProxy("ALAnimatedSpeech")
+        self.motion = ALProxy("ALMotion") 
+        self.posture = ALProxy("ALRobotPosture")
+        self.touch = ALProxy("ALTouch")
         self.tts.setVolume(0.6)
 
         self.asr = ALProxy("ALSpeechRecognition")
@@ -67,7 +71,6 @@ class SpeachRecModule(ALModule):
         self.memory.subscribeToEvent("WordRecognized",
             "SpeachRec",
             "onSpeechDetected")
-
 
 def main():
     """ Main entry point
@@ -111,35 +114,31 @@ def main():
         
     g = GameEngine()
 
-    card_names = {
-        'joker' : 1/12,
-        '8 Clubs' : 6/12,
-        '9 Clubs' : 5/12,
-        '10 Clubs' : 4/12,
-        'Jack Clubs' : 3/12,
-        'Queen Clubs' : 2/12,
-        '8 Diamonds' : 7/12,
-        '9 Diamonds' : 8/12,
-        '10 Diamonds' : 9/12,
-        'Jack Diamonds' : 10/12,
-        'Queen Diamonds' : 11/12,
-        'ace' : 12/12,
-        }
+    SpeachRec.motion.wakeUp()
+    configuration = {"bodyLanguageMode":"contextual"}
+    time.sleep(3)
+    SpeachRec.atts.say("Hello, I am Nao... Do you wan't to play a game?", configuration)
+
+    raw_input('Yes or no')
 
     try:
         while (not isDefeat and not isVictory):
             msg = g.getNextMessage()
             action = g.getStateAction()
             
-            #DEBUG MESSAGE
-            print("Scenario is: "+ g.game_state)
-            print("Action is: " +action)
-            print(g.scenario.game_state)
-            print(msg)
-            SpeachRec.tts.say(msg)
+##            #DEBUG MESSAGE
+##            print("Scenario is: "+ g.game_state)
+##            print("Action is: " +action)
+##            print(g.scenario.game_state)
+##            print(msg)
+            
+            SpeachRec.atts.say(msg,configuration)
             
             if action == "combat":
-                next_state = raw_input("Enter 1-4: ")
+                SpeachRec.tts.say('Touch me .. to influence combat..')
+                time.sleep(2)
+                print(SpeachRec.lastTouch)
+                next_state = round(4*random())
                 if next_state == "1":
                     next_state = "great success"
                 elif next_state == "2":
@@ -154,6 +153,10 @@ def main():
                 g.scenario.game_state.vocabulary
                 SpeachRec.asr.pause(True)
                 vocabulary = g.scenario.game_state.vocabulary
+
+                SpeachRec.atts.say('Your options are:...')
+                SpeachRec.atts.say('....'.join(vocabulary))
+                
                 SpeachRec.asr.setVocabulary(vocabulary, False)
                 SpeachRec.asr.pause(False)
                 SpeachRec.lastWord = ''
@@ -183,18 +186,22 @@ def main():
         print
         print "Interrupted by user, shutting down"
 
+        SpeachRec.memory.unsubscribeToEvent("TouchChanged",
+            "HumanGreeter")
+        SpeachRec.memory.unsubscribeToEvent("WordRecognized",
+            "SpeachRec")
         SpeachRec.asr.setAudioExpression(False)
         myBroker.shutdown()
         sys.exit(0)
 
     if isVictory:
                 print(g.getNextMessage())
-                SpeachRec.tts.say(g.getNextMessage())
+                SpeachRec.atts.say(g.getNextMessage())
                 print("Concrats You Win!!")
                 SpeachRec.tts.say('Congrats You Win!.. Badass')
     else:
                 print(g.getNextMessage())
-                SpeachRec.tts.say(g.getNextMessage())
+                SpeachRec.atts.say(g.getNextMessage())
                 print("You Lose!")
                 SpeachRec.tts.say('You Lose!')
 

@@ -28,7 +28,7 @@ class SubMountain:
 				and this is your latest... You are now. standing on top of a
 				mountain... to your left there is a dark and misty forest... 
 				To your right there is an ancient castle... which way will you
-				go?... Left. Or. right... choose wisely..."""
+				go?... To the castle?... or to the forest?..."""
 	action = "choice"
 	isVictory = False
 	isDefeat = False
@@ -51,7 +51,7 @@ class SubForest:
 		return SubForest()
 
 class SubCastle:
-	message = """You have taken the path to the castle… you come to a stop at the gate… you can either enter the castle… or go round and walk through the garden… would you enter…. Or go to the garden…"""
+	message = """You have taken the path to the castle.. you come to a stop at the gate.. you can either enter the castle.. or go round and walk through the garden.. would you enter... Or go to the garden.."""
 	action = "none"
 	isVictory = False
 	isDefeat = False
