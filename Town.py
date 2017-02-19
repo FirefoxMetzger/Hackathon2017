@@ -20,7 +20,7 @@ class Town:
 		return self.game_state.isDefeat
 
 class SubTown:
-	message = "Town Message"
+	message = """you enter the town to look around… you talk about and ask people about the town… you hear that there are three places you are interested in going… The alchemist where you can find the portions to help you recover from your wounds… The armoury to repair your armour and sword… and the mansion where you have some personal business… where do you go to… to meet the alchemist… go to the armoury… or go to the mansion…"""
 	action = "choice"
 	vocabulary = ['Manson', 'Armory', 'Alchemist']
 	isVictory = False
@@ -34,7 +34,7 @@ class SubTown:
 			return SubAlchemist()
 
 class SubManson:
-	message = "Manson Message"
+	message = """you go to the mansion…. You have heard a rumour.  that your long-lost love. Brunilda.. is imprisoned in the mansion… the mansion belongs to rich man and it is guarded by Spartan mercenaries….you can talk to the guards…. or You can fight your way through now… or break in later…. What will you do?.."""
 	action = "choice"
 	vocabulary = ['break in', 'talk guard', 'fight']
 	isVictory = False
@@ -50,7 +50,7 @@ class SubManson:
 			return subMansonFight()
 			
 class SuccessRollManson:
-	message = "Roll Dice"
+	message = """you manage to break in at night… you are assuming all will be sleeping… will you succeed…. """
 	action = "SuccessRoll"
 	isVictory = False
 	isDefeat = False
@@ -62,7 +62,7 @@ class SuccessRollManson:
 			return SubMansonDie()
 			
 class SubMansonDie:
-	message = "You break your legs and die"
+	message = """You have underestimated the security…. You get caught and the guards think you have come to molest the lady of the house… you are beaten to death… you… die…"""
 	action = "none"
 	isVictory = False
 	isDefeat = True
@@ -71,7 +71,7 @@ class SubMansonDie:
 		return SubMansonDie()
 		
 class SubMansonGuards:
-	message = "You climb over fence, but guards inside spot you. You go to jail."
+	message = "You manage to climb over fence, but guards inside spot you. You go to jail."
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -121,19 +121,19 @@ class subMansonFight:
 		return self
 		
 class WinSubMansonFight:
-	message = "You smash guards. Call reinforcement you go to jail"
+	message = """You manage to fight through all the guards and kill them all….. you break through door after door… you find the rich man… you hold him at sword point.. and ask him to take you to Brunilda…. Finally after a long. Long time you are together…. you take her in your arms and go to the stables…. You grab two horses and ride on. To the sunset…."""
 	action = "none"
 	isVictory = False
 	isDefeat = True
 
 class DieSubMansonFight:
-	message = "You die fighting the Guards in front of the Manson."
+	message = """You jump on the soldiers roaring like a crazy person…. They point their spears upwards and you get yourself impaled on them…. You die.. like an idiot…"""
 	action = "none"
 	isVictory = False
 	isDefeat = True
 	
 class SubArmory:
-	message = "Armory Message"
+	message = """You go to the armoury to find the equipment… you look around the place… you see what you are looking for …. But the equipment are expensive… would you come later and steal the equipment… or ask from the blacksmith for some free service…."""
 	action = "choice"
 	vocabulary = ['ask guard', 'break in']
 	isVictory = False
@@ -146,7 +146,7 @@ class SubArmory:
 			return SubArmoryBreakIn()
 			
 class SubArmoryToTown:
-	message = "You talk to guard. Get Lost. Back to town."
+	message = """you ask the black smith for some free stuff…. He looks at you and tell you to get lost… and kick you out of the armoury…."""
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -154,7 +154,7 @@ class SubArmoryToTown:
 		return SubTown()
 		
 class SubArmoryBreakIn:
-	message = "Breaking into Armory"
+	message = """you manage to break in at night… you are assuming all will be sleeping… will you succeed…. """
 	action = "SuccessRoll"
 	isVictory = False
 	isDefeat = False
@@ -165,7 +165,7 @@ class SubArmoryBreakIn:
 			return SubArmoryBreakInFail()
 			
 class SubArmoryBreakInFail:
-	message = "You are spotted and imprisoned by guards."
+	message = """You have underestimated the security…. You get caught and the guards think you have come to molest the lady of the house… you are beaten to death… you… die…"""
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -173,7 +173,7 @@ class SubArmoryBreakInFail:
 		return SubJail()
 		
 class SubArmoryBreakInSuccess():
-	message = "Succeed breaking into armory. Steal what?"
+	message = """you go to the armoury in the middle of the night….. you break into the place and start searching the place…. you go through the expensive items… you have three options…. you can either take a shield… an armour…. Or a chest that is heavy and locked…. Which one will you take…."""
 	action = "choice"
 	vocabulary = ['shield', 'armor', 'locked chest']
 	isVictory = False
@@ -187,7 +187,7 @@ class SubArmoryBreakInSuccess():
 			return SubArmoryLockedChest()
 
 class SubArmoryStealShield():
-	message = "You Steal the shield and continue to enter the manson."
+	message = """You manage to escape with the shield….. now you travel to the mansion…."""
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -195,7 +195,7 @@ class SubArmoryStealShield():
 		return SubMansonWithArmor()
 			
 class SubArmoryStealArmor():
-	message = "You Steal the shield and continue to enter the manson."
+	message = """Success….. you manage to escape with the armour…..  and go to the mansion…"""
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -203,7 +203,7 @@ class SubArmoryStealArmor():
 		return SubMansonWithArmor()
 		
 class SubArmoryLockedChest():
-	message = "While you try to lockpick the chest, a group of guards show up. They imprison you."
+	message = """you manage to climb on to the wall with the chest… but unfortunately when you try to climb down.. you slip and fall…. The chest crushes your left knee… you are caught and sent to jail… you rot their…"""
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -211,7 +211,7 @@ class SubArmoryLockedChest():
 		return SubJail()
 			
 class SubMansonWithArmor():
-	message = "At Manson With armor."
+	message = """you go to the mansion…. You have heard a rumour.  that your long-lost love. Brunilda.. is imprisoned in the mansion… the mansion belongs to rich man and it is guarded by Spartan mercenaries….you talk to the guards…. They tell you to get lost… You can fight your way through now… or break in later…. What will you do?.."""
 	action = "choice"
 	vocabulary = ['intimidate', 'fight']
 	isVictory = False
@@ -234,7 +234,7 @@ class SubMansonArmorIntimidate():
 			return SubMansonArmorFight()
 			
 class SubMansonArmorToLeader():
-	message = "The scared guards escort you to their leader."
+	message = "The guards are very scared… they take you to the merchant… you hold him at sword point.. and ask him to take you to Brunilda…."
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -242,7 +242,7 @@ class SubMansonArmorToLeader():
 		return SubInManson()
 		
 class SubInManson():
-	message = "You encounter the village elder and marry his beautiful daughter."
+	message = """Finally after a long. Long time you are together…. you take her in your arms and go to the stables…. You grab two horses and ride on. To the sunset…."""
 	action = "none"
 	isVictory = True
 	isDefeat = False
@@ -250,7 +250,7 @@ class SubInManson():
 		return SubInManson()
 			
 class SubMansonArmorFight():
-	message = "You engage the guards in combat."
+	message = """You failed to intimidate the Spartans …. Because they are… well… Spartans… now you have to fight... """
 	action = "combat"
 	isVictory = False
 	isDefeat = False
@@ -282,7 +282,7 @@ class SubMansonArmorFight():
 		return self
 		
 class SubMansonArmorFightDie:
-	message = "Despite using protection you fail to win against the guards. They kill you."
+	message = """You jump on the soldiers roaring like a crazy person…. They point their spears upwards and you get yourself impaled on them…. You die.. like an idiot…"""
 	action = "none"
 	isVictory = False
 	isDefeat = True
@@ -291,7 +291,7 @@ class SubMansonArmorFightDie:
 
 			
 class SubAlchemist:
-	message = "Alchemist Message"
+	message = """You enter the alchemists shop… although he like to help you he proposes that you choose the portion without telling you what they are… he places three portions in front of you… one black… one blue… and one green… which one will you select…"""
 	action = "choice"
 	vocabulary = ['black potion', 'blue potion', 'green potion']
 	isVictory = False
@@ -305,7 +305,7 @@ class SubAlchemist:
 			return SubGreenPotion()
 			
 class SubBlackPotion:
-	message = "The Black potion was poisenous. You Die."
+	message = """You drink the black portion… it smells like black tar oil… suddenly your insides burn… it turns out to be poison… you fall…… and .... die…"""
 	action = "none"
 	isVictory = False
 	isDefeat = True
@@ -313,7 +313,7 @@ class SubBlackPotion:
 		return SubBlackPotion()
 		
 class SubBluePotion:
-	message = "You feel strong, but also poisoned"
+	message = """you drink the blue portion… it smells like onions and bacon…. Suddenly you feel like you have been hit by lightning…. When you wake up the alchemist informs you that the portion has given you superhuman strength but has also contains poison….  Only way for you to survive is to find the antidote"""
 	action = "choice"
 	vocabulary = ['ignore', 'antidote']
 	isVictory = False
@@ -325,8 +325,7 @@ class SubBluePotion:
 			return SubPoorChild()
 			
 class SubMansonPoisoned:
-	message = ("You decide to ignore your feeling and go to the Manson.",
-	"When you arrive you can barely stand and feel like throwing up.")
+	message = """you laugh at the alchemist and walk away…you go to the mansion to take care of your personal business… you see a town guard… Talk to him or go to town"""
 	action = "choice"
 	vocabulary = ['Town', 'talk guard']
 	isVictory = False
@@ -338,8 +337,7 @@ class SubMansonPoisoned:
 			return SubMansonPoisonedDie()
 			
 class SubMansonPoisonedDie:
-	message = ("You faint on your way.",
-	"Ignoring poison is a bad idea. You are dead.")
+	message = """You feel weird… cough…. Fall to the ground…. And die…."""
 	action = "none"
 	isVictory = False
 	isDefeat = True
@@ -347,7 +345,7 @@ class SubMansonPoisonedDie:
 		return SubMansonPoisonedDie()
 			
 class SubPoorChild:
-	message = "You find a poor child, which happens to have the antidote."
+	message = """you heist to find the antidote… you talk to several people… try to find the antidote… finally you find a child with the correct antidote.... you can either steal the portion or… you can ask for it… what will you do…"""
 	action = "choice"
 	vocabulary = ['steal', 'ask']
 	isVictory = False
@@ -359,7 +357,7 @@ class SubPoorChild:
 			return SubPoorChildAsk()
 
 class SubPoorChildAsk:
-	message = "She woun't give you the antidote, she has to cure her grandma."
+	message = """You ask the child for the antidote… the child refuses and tells you that it is for his grandmother…. You can either steal it… or you can kill him and take it by force…. What will you do…"""
 	action = "choice"
 	vocabulary = ['steal', 'kill']
 	isVictory =False
@@ -371,7 +369,7 @@ class SubPoorChildAsk:
 			return SubPoorChildKill()			
 
 class SubPoorChildSteal:
-	message = "You try to steal the antidote from the girl."
+	message = """You try to steal the antidote…"""
 	action = "SuccessRoll"
 	isVictory = False
 	isDefeat = False
@@ -383,7 +381,7 @@ class SubPoorChildSteal:
 
 
 class SubPoorChildKill:
-	message = "Heartless Bastard. You have no trouble killing her and obtain the antidote."
+	message = """You manage to strangle the child and take the antidote…  now you are cured… and also have super strength…"""
 	action = "none"
 	isVictory = False
 	isDefeat = False
@@ -391,7 +389,7 @@ class SubPoorChildKill:
 		return SubMansonStrength()
 
 class SubMansonStrength:
-	message = "You managed to cure your poison and head for the manson."
+	message = """You successfully manage to steal the antidote… and now you have super strength … and also not dying…. You go to the mansion…. It is surrounded by a massive wall… at the gate there are many guards…. You can either engage the guards or… jump the wall…"""
 	action = "choice"
 	vocabulary = ['jump', 'fight']
 	isVictory = False
@@ -403,7 +401,7 @@ class SubMansonStrength:
 			return SubMansonArmorFight()
 			
 class SubMansonStrengthJump:
-	message = "You try to jump over the wall using your superhuman strength."
+	message = """You mange to jump over the wall easily with your super strength…."""
 	action = "SuccessRoll"
 	isVictory = False
 	isDefeat = False
@@ -414,7 +412,7 @@ class SubMansonStrengthJump:
 			return DieStrengthMansonJump()
 			
 class DieStrengthMansonJump:
-	message = "You jump over the wall, but land unlucky and break your legs. You die."
+	message = """You jump over a really tall wall…. When you land.. you brake your legs… guards find you get caught and the guards think you have come to molest the lady of the house… you are beaten to death… you… die…"""
 	action = "none"
 	isVictory = False
 	isDefeat = True
@@ -422,9 +420,7 @@ class DieStrengthMansonJump:
 		return DieStrengthMansonJump()
 		
 class SubGreenPotion:
-	message = ("The green potion was delicious. You have trouble staying",
-	"awake and fall into a slumber. When you wake up you are surrounded by guards.",
-	"They take you to the prison")
+	message = """You drink the green portion…. It tastes like peppermint…. You fall a sleep… when you wake up you notice that you are in the jail… then you realise that the alchemist had framed you…. You rot in prison…"""
 	action = "none"
 	isVictory = False
 	isDefeat = False
