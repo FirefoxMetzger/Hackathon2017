@@ -29,6 +29,7 @@ class SpeachRecModule(ALModule):
     """
 
     lastWord = ''
+    lastImage = []
     
     def __init__(self, name):
         ALModule.__init__(self, name)
@@ -37,7 +38,7 @@ class SpeachRecModule(ALModule):
 
         # Create a proxy to ALTextToSpeech for later use
         self.tts = ALProxy("ALTextToSpeech")
-        self.tts.setVolume(0.5)
+        self.tts.setVolume(0.6)
 
         self.asr = ALProxy("ALSpeechRecognition")
 
@@ -46,10 +47,9 @@ class SpeachRecModule(ALModule):
         self.memory = ALProxy("ALMemory")
         self.memory.subscribeToEvent("WordRecognized",
             "SpeachRec",
-            "onFaceDetected")
-        
+            "onSpeechDetected")
 
-    def onFaceDetected(self, eventName, value, subscriberIdentifier):
+    def onSpeechDetected(self, eventName, value, subscriberIdentifier):
         """ This will be called each time a face is
         detected.
 
@@ -66,7 +66,7 @@ class SpeachRecModule(ALModule):
         # Subscribe again to the event
         self.memory.subscribeToEvent("WordRecognized",
             "SpeachRec",
-            "onFaceDetected")
+            "onSpeechDetected")
 
 
 def main():
@@ -111,6 +111,21 @@ def main():
         
     g = GameEngine()
 
+    card_names = {
+        'joker' : 1/12,
+        '8 Clubs' : 6/12,
+        '9 Clubs' : 5/12,
+        '10 Clubs' : 4/12,
+        'Jack Clubs' : 3/12,
+        'Queen Clubs' : 2/12,
+        '8 Diamonds' : 7/12,
+        '9 Diamonds' : 8/12,
+        '10 Diamonds' : 9/12,
+        'Jack Diamonds' : 10/12,
+        'Queen Diamonds' : 11/12,
+        'ace' : 12/12,
+        }
+
     try:
         while (not isDefeat and not isVictory):
             msg = g.getNextMessage()
@@ -142,8 +157,8 @@ def main():
                 SpeachRec.asr.setVocabulary(vocabulary, False)
                 SpeachRec.asr.pause(False)
                 SpeachRec.lastWord = ''
-                SpeachRec.asr.subscribe('Test_ASR')
 
+                SpeachRec.asr.subscribe('Test_ASR')
                 while SpeachRec.lastWord == '':
                     time.sleep(0.2)
                 SpeachRec.asr.unsubscribe('Test_ASR')
@@ -152,10 +167,8 @@ def main():
                 next_state = SpeachRec.lastWord
                 
             elif action == "SuccessRoll":
-                    rng = random()
-                    print("RNGsus gave you:"+str(rng))
-                    next_state = rng
-                    
+                next_state = random()
+                print('RNGsus decides for a: '+str(next_state))
             elif action == "none":
                     next_state = 0
                      
@@ -169,7 +182,7 @@ def main():
     except KeyboardInterrupt:
         print
         print "Interrupted by user, shutting down"
-        
+
         SpeachRec.asr.setAudioExpression(False)
         myBroker.shutdown()
         sys.exit(0)
@@ -183,7 +196,7 @@ def main():
                 print(g.getNextMessage())
                 SpeachRec.tts.say(g.getNextMessage())
                 print("You Lose!")
-                SpeachRec.tts.say('You Lose! Suck it scrub.')
+                SpeachRec.tts.say('You Lose!')
 
 
 
