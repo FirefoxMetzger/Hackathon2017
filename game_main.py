@@ -14,6 +14,7 @@ from naoqi import ALBroker
 from naoqi import ALModule
 
 from optparse import OptionParser
+from random import random
 
 NAO_IP = "192.168.1.110"
 
@@ -120,7 +121,7 @@ def main():
             print("Action is: " +action)
             print(g.scenario.game_state)
             print(msg)
-            #tts.say(msg)
+            SpeachRec.tts.say(msg)
             
             if action == "combat":
                 next_state = raw_input("Enter 1-4: ")
@@ -175,10 +176,14 @@ def main():
 
     if isVictory:
                 print(g.getNextMessage())
+                SpeachRec.tts.say(g.getNextMessage())
                 print("Concrats You Win!!")
+                SpeachRec.tts.say('Congrats You Win!.. Badass')
     else:
                 print(g.getNextMessage())
+                SpeachRec.tts.say(g.getNextMessage())
                 print("You Lose!")
+                SpeachRec.tts.say('You Lose! Suck it scrub.')
 
 
 
