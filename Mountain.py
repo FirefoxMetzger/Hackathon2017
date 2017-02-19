@@ -24,7 +24,11 @@ class Mountain:
 		return self.game_state.isDefeat
 		
 class SubMountain:
-	message = "On top of a Mountain. Forest or Castle?"
+	message = """Imagine you are a swordsman. You have gone in many adventures 
+				and this is your latest... You are now. standing on top of a
+				mountain... to your left there is a dark and misty forest... 
+				To your right there is an ancient castle... which way will you
+				go?... Left. Or. right... choose wisely…"""
 	action = "choice"
 	isVictory = False
 	isDefeat = False
@@ -35,7 +39,9 @@ class SubMountain:
 			return SubForest()
 			
 class SubForest:
-	message = "Going into Forest"
+	message = """You walk in to the forest… it looks dark… ancient trees grow 
+				in there… you feel as if they are looking down at you… will you 
+				enter the forest or... walk along the forest."""
 	action = "none"
 	isVictory = False
 	isDefeat = False
